@@ -1,5 +1,14 @@
 {
   "projects": {
     "default": "franq-28d43"
+  },
+  "targets": {
+    "franq-28d43": {
+      "hosting": {
+        "app": [
+          "franq-28d43"
+        ]
+      }
+    }
   }
 }
