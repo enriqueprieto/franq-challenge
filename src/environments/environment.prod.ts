@@ -8,5 +8,9 @@ export const environment = {
     storageBucket: "franq-28d43.appspot.com",
     messagingSenderId: "596058391798",
     appId: "1:596058391798:web:00873e46785a6de67218d7"
+  },
+  storage:{
+    name: 'franqApp',
+    driverOrder: ['indexeddb', 'sqlite', 'websql', 'localstorage']
   }
 };
