@@ -1,9 +1,38 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>login</ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content>
-
+  <ion-grid fixed>
+    <section>
+      <h1>
+        <ion-text color="tertiary">
+          FranqApp
+        </ion-text>
+      </h1>
+      <h2>Entre na sua conta para continuar</h2>
+      <ion-list>
+        <ion-item class="ion-align-items-center">
+          <ion-icon name="at" slot="start" color="tertiary"></ion-icon>
+          <ion-label position="stacked">E-mail</ion-label>
+          <ion-input [(ngModel)]="auth.email" type="email" inputmode="email" placeholder="email@example.com"></ion-input>
+        </ion-item>
+        <ion-item class="ion-align-items-center">
+          <ion-icon name="key" slot="start" color="tertiary"></ion-icon>
+          <ion-label position="stacked">Senha</ion-label>
+          <ion-input [(ngModel)]="auth.password" type="password" inputmode="password" placeholder="Sua senha"></ion-input>
+        </ion-item>
+      </ion-list>
+      <ion-button expand="block" color="tertiary" shape="round" [disabled]="!ready()" (click)="submit()">
+        Entrar
+      </ion-button>
+    </section>
+    <section class="ion-padding-vertical">
+      <h4>Não tem conta?</h4>
+      <p>
+        <ion-text color="medium">
+          Para poder acessar o app, precisa ter uma conta, para criar é facil, clique no botão abaixo :)
+        </ion-text>
+      </p>
+      <ion-button expand="block" color="tertiary" fill="outline" shape="round" (click)="navigateToRegister()">
+        Criar conta
+      </ion-button>
+    </section>
+  </ion-grid>
 </ion-content>
