@@ -1,9 +1,40 @@
-<ion-header>
+<ion-header class="ion-no-border">
   <ion-toolbar>
-    <ion-title>register</ion-title>
+    <ion-buttons slot="start">
+      <ion-button color="tertiary" (click)="navigateToLogin()">
+        <ion-icon name="chevron-back"></ion-icon> Voltar
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-
+  <ion-grid fixed>
+    <h1>
+      Crie uma conta no <ion-text color="tertiary">FranqApp</ion-text>
+    </h1>
+    <p>
+      <ion-text color="medium">Preencha os campos abaixo para criar uma nova conta.</ion-text>
+    </p>
+    <ion-list>
+      <ion-item class="ion-align-items-center">
+        <ion-icon name="at" slot="start" color="tertiary"></ion-icon>
+        <ion-label position="stacked">E-mail</ion-label>
+        <ion-input [(ngModel)]="auth.email" type="email" inputmode="email" placeholder="email@example.com"></ion-input>
+      </ion-item>
+      <ion-item class="ion-align-items-center">
+        <ion-icon name="key" slot="start" color="tertiary"></ion-icon>
+        <ion-label position="stacked">Senha</ion-label>
+        <ion-input [(ngModel)]="auth.password" type="password" inputmode="password" placeholder="Sua senha"></ion-input>
+      </ion-item>
+      <ion-item class="ion-align-items-center">
+        <ion-icon name="key" slot="start" color="tertiary"></ion-icon>
+        <ion-label position="stacked">Confirmar Senha</ion-label>
+        <ion-input [(ngModel)]="auth.passwordConfirm" type="password" inputmode="password" placeholder="Confirme sua senha"></ion-input>
+      </ion-item>
+    </ion-list>
+    <ion-button expand="block" shape="round" color="tertiary" [disabled]="!ready()" (click)="submit()">
+      Criar conta
+    </ion-button>
+  </ion-grid>
 </ion-content>
