@@ -1,3 +1,6 @@
+import { Injectable } from "@angular/core";
+import { HgConsoleApi } from "../api/api";
+
 export interface HgConsoleFinancesCurrenciesOptions{
     name:string; 
     buy:number; 
@@ -34,6 +37,7 @@ export interface HgConsoleFinancesTaxes{
     selic:number; 
     selic_daily:number;
 }
+
 export interface HgConsoleFinancesResults{
     available_sources?:string[];
     bitcoin?:HgConsoleFinancesBitcoins;
@@ -41,10 +45,24 @@ export interface HgConsoleFinancesResults{
     stocks?:HgConsoleFinancesStocks;
     taxes?:HgConsoleFinancesTaxes[];
 }
-export interface HgConsoleFinancesApiResponse{
-    by:string;
-    valid_key:boolean;
-    results:HgConsoleFinancesResults;
-    execution_time:number;
-    from_cache:boolean;
+
+@Injectable({
+    providedIn: 'any'
+})
+export class HgConsoleFinances{
+    constructor(private api:HgConsoleApi){
+        this.api.setPath('finance');
+    }
+    get(){
+        return this.api.get<HgConsoleFinancesResults>();
+    }
+    convertValueInBrl(value:number){
+        return value.toLocaleString('pt-br', { maximumFractionDigits: 2 });
+    }
+    convertValueInDollar(value:number){
+        return value.toLocaleString('en-US', { maximumFractionDigits: 2 });
+    }
+    convertVariation(value:number){
+        return value.toLocaleString('pt-br', { maximumFractionDigits: 3 });
+    }
 }

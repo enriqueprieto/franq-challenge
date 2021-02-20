@@ -5,7 +5,8 @@ import { FormsModule } from '@angular/forms';
 import { HomePage } from './home.page';
 
 import { HomePageRoutingModule } from './home-routing.module';
-import { HgConsoleFinancesService } from '../services/hg-console/hg-console-finances.service';
+import { AuthService } from '../services/auth/auth.service';
+import { HgConsoleFinancesModule } from '../libs/hg-console/finances/finances.module';
 
 
 @NgModule({
@@ -13,11 +14,12 @@ import { HgConsoleFinancesService } from '../services/hg-console/hg-console-fina
     CommonModule,
     FormsModule,
     IonicModule,
+    HgConsoleFinancesModule,
     HomePageRoutingModule
   ],
   declarations: [HomePage],
   providers: [
-    HgConsoleFinancesService
+    AuthService
   ]
 })
 export class HomePageModule {}

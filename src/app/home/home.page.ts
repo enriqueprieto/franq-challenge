@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { AlertController } from '@ionic/angular';
-import { HgConsoleFinancesBitcoins, HgConsoleFinancesBitcoinsOptions, HgConsoleFinancesCurrencies, HgConsoleFinancesCurrenciesOptions, HgConsoleFinancesResults, HgConsoleFinancesStocks, HgConsoleFinancesStocksOptions } from '../services/hg-console/hg-console-finances.model';
-import { HgConsoleFinancesService } from '../services/hg-console/hg-console-finances.service';
+import { AlertController, ModalController } from '@ionic/angular';
+import { HgConsoleFinancesCurrenciesViewComponent } from '../libs/hg-console/finances/currencies/components/view/view.component';
+// import { CurrencesViewComponent } from '../libs/currences/currences-view/currences-view.component';
+import { HgConsoleFinances, HgConsoleFinancesBitcoins, HgConsoleFinancesBitcoinsOptions, HgConsoleFinancesCurrencies, HgConsoleFinancesCurrenciesOptions, HgConsoleFinancesResults, HgConsoleFinancesStocks, HgConsoleFinancesStocksOptions  } from '../libs/hg-console/finances/finances';
+import { AuthService } from '../services/auth/auth.service';
 
 interface SlideConfig{
   slidesPerView?:number|'auto';
@@ -54,7 +56,7 @@ export class HomePage implements OnInit{
         480: {
           slidesPerView: 2.1
         },
-        640: {
+        768: {
           slidesPerView: 3.1
         }
       }
@@ -72,7 +74,7 @@ export class HomePage implements OnInit{
         480: {
           slidesPerView: 2.1
         },
-        640: {
+        768: {
           slidesPerView: 3.1
         }
       }
@@ -80,9 +82,13 @@ export class HomePage implements OnInit{
     items: []
   };
   hgConsoleLoading:boolean = false;
+  user:firebase.default.User;
   constructor(
-    private hgConsoleFinance:HgConsoleFinancesService,
-    private alertCtrl:AlertController
+    // private hgConsoleFinance:HgConsoleFinancesService,
+    private alertCtrl:AlertController,
+    private authService:AuthService,
+    private modalCtrl:ModalController,
+    private hgConsoleFinance:HgConsoleFinances
   ) {}
   ngOnInit(): void {
     this.initialize();
@@ -93,6 +99,7 @@ export class HomePage implements OnInit{
       this.currencies.items = this.convertHGDataToCurrencies(this.hgConsoleFinanceData.currencies);
       this.stocks.items = this.convertHGDataToStocks(this.hgConsoleFinanceData.stocks);
       this.bitcoins.items = this.convertHGDataToBitcoins(this.hgConsoleFinanceData.bitcoin);
+      this.user = await this.authService.getCurrentUser();
     } catch (error) {
       return this.printAlertError(error);
     }
@@ -108,7 +115,7 @@ export class HomePage implements OnInit{
   }
   async hgConsoleLoadData(){
     this.hgConsoleLoading = true;
-    let response = await this.hgConsoleFinance.getFinances();
+    let response = await this.hgConsoleFinance.get();
     this.hgConsoleLoading = false;
     return response;
   }
@@ -159,5 +166,15 @@ export class HomePage implements OnInit{
   }
   convertVariation(value:number){
     return value.toLocaleString('pt-br', { maximumFractionDigits: 3 });
+  }
+  async openModalCurrence(currencie:HgSectionItem<HgConsoleFinancesCurrenciesOptions>){
+    let modal = await this.modalCtrl.create({
+      component: HgConsoleFinancesCurrenciesViewComponent,
+      componentProps: {
+        currencie
+      },
+      cssClass: ['modal-custom']
+    });
+    return await modal.present();
   }
 }

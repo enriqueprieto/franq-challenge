@@ -11,6 +11,7 @@ import { environment } from '../environments/environment';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { IonicStorageModule } from '@ionic/storage';
+import { HgConsoleFinancesModule } from './libs/hg-console/finances/finances.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -23,6 +24,7 @@ import { IonicStorageModule } from '@ionic/storage';
     HttpClientModule,
     AngularFireModule.initializeApp(environment.firebase), 
     AngularFireAuthModule,
+    HgConsoleFinancesModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],

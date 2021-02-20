@@ -1,45 +1,25 @@
-<ion-header class="ion-no-border">
-  <ion-toolbar color="tertiary">
-      <ion-grid fixed>
-        <ion-buttons>
-          <ion-button>
-            <ion-icon name="person"></ion-icon>
-          </ion-button>
-        </ion-buttons>
-      </ion-grid>
-  </ion-toolbar>
-</ion-header>
-<ion-content>
+<ion-content color="light">
+  <section id="header">
+    <ion-grid fixed>
+      <h1 class="ion-padding-start">
+        Bem vindo ao <span>FranqApp</span>
+      </h1>
+      <ion-item color="tertiary" lines="none" *ngIf="user" button detail class="ion-align-items-center">
+        <ion-icon name="happy" slot="start" color="warning"></ion-icon>
+        <ion-label>
+          <p>{{ (user.displayName)?user.displayName:'Sua conta' }}</p>
+          <h2>{{ user.email }}</h2>
+        </ion-label>
+      </ion-item>
+    </ion-grid>
+  </section>
+  <ion-progress-bar color="tertiary" *ngIf="hgConsoleLoading" type="indeterminate"></ion-progress-bar>
+  <div *ngIf="hgConsoleFinanceData">
+    <hg-console-finances-section id="currencies" title="Cotação das principais moedas para o real" >
+      <hg-console-finances-currencies-list [items]="currencies.items" [slideConfig]="currencies.slideConfig" (onClickItem)="openModalCurrence($event)"></hg-console-finances-currencies-list>
+    </hg-console-finances-section>
+  </div>
   <ion-grid fixed>
-    <h1 class="ion-padding-start">
-      Bem vindo ao <ion-text color="tertiary">FranqApp</ion-text>
-    </h1>
-    <ion-progress-bar color="tertiary" *ngIf="hgConsoleLoading" type="indeterminate"></ion-progress-bar>
-    <section id="currencies" *ngIf="currencies.items.length > 0" class="ion-padding-vertical">
-      <ion-list mode="ios">
-        <ion-list-header>
-          Cotação das principais moedas para o real
-        </ion-list-header>
-      </ion-list>
-      <ion-slides pager="true" [options]="currencies.slideConfig" class="ion-padding-start ion-padding-bottom">
-        <ion-slide *ngFor="let item of currencies.items" class="ion-padding-vertical">
-          <ion-card class="ion-text-left ion-no-margin" mode="ios">
-            <ion-card-header>
-              <ion-badge [color]="(item.data.variation < 0)?'danger':'success'">
-                {{ convertVariation(item.data.variation) }} %
-              </ion-badge>
-              <ion-card-title class="ion-text-nowrap">R$ {{ convertValue(item.data.buy) }}</ion-card-title>
-              <ion-card-subtitle>{{ item.name }} / BRL</ion-card-subtitle>
-            </ion-card-header>
-            <ion-list>
-              <ion-item color="tertiary" button>
-                <ion-label>Ver detalhes</ion-label>
-              </ion-item>
-            </ion-list>
-          </ion-card>
-        </ion-slide>
-      </ion-slides>
-    </section>
     <section id="stocks" *ngIf="stocks.items.length > 0" class="ion-padding-vertical">
       <ion-list mode="ios">
         <ion-list-header>

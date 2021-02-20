@@ -1,6 +1,7 @@
 export const environment = {
   production: true,
   hgConsole: {
+    apiKey: "d98f4063",
     finances:{
       apiKey: "d98f4063",
       endpoint: "https://api.hgbrasil.com/finance"

@@ -1,0 +1,21 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar color="tertiary">
+    <ion-buttons slot="start">
+      <ion-button (click)="back()">
+        <ion-icon name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div id="cover" class="ion-padding ion-text-center">
+    <ion-badge [color]="(currencie.data.variation < 0)?'danger':'success'">
+      {{ hgConsoleFinances.convertVariation(currencie.data.variation) }} %
+    </ion-badge>
+    <h1 class="ion-no-margin">
+      <span>R$ {{ hgConsoleFinances.convertValueInBrl(currencie.data.buy) }}</span>
+      {{ currencie.name }}
+    </h1>
+  </div>
+</ion-content>

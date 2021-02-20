@@ -1,0 +1,8 @@
+<section class="ion-padding-vertical">
+  <ion-grid fixed>
+    <ion-list mode="ios" *ngIf="title">
+      <ion-list-header>{{title}}</ion-list-header>
+    </ion-list>
+    <ng-content></ng-content>
+  </ion-grid>
+</section>
