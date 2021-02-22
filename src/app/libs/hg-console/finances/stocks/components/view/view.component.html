@@ -10,15 +10,12 @@
 
 <ion-content>
   <div id="cover" class="ion-padding ion-text-center">
-    <ion-badge [color]="(currencie.data.variation < 0)?'danger':'success'">
-      {{ hgConsoleFinances.convertVariation(currencie.data.variation) }} %
+    <ion-badge [color]="(stock.data.variation < 0)?'danger':'success'">
+      {{ hgConsoleFinances.convertVariation(stock.data.variation) }} %
     </ion-badge>
     <h1 class="ion-no-margin">
-      <span>R$ {{ hgConsoleFinances.convertValueInBrl(currencie.data.buy) }}</span>
+      {{ stock.name }}
     </h1>
-    <h2>
-      {{ currencie.name }} {{ currencie.data.name }} / BRL Real
-    </h2>
   </div>
   <ion-list lines="full" mode="ios">
     <ion-list-header>
@@ -29,7 +26,7 @@
         Sigla
       </ion-label>
       <ion-note slot="end">
-        {{ currencie.name }}
+        {{ stock.name }}
       </ion-note>
     </ion-item>
     <ion-item>
@@ -37,33 +34,23 @@
         Nome
       </ion-label>
       <ion-note slot="end">
-        {{ currencie.data.name }}
+        {{ stock.data.name }}
       </ion-note>
     </ion-item>
     <ion-item>
       <ion-label>
         Variação
       </ion-label>
-      <ion-note slot="end" [color]="(currencie.data.variation < 0)?'danger':'success'">
-        {{ hgConsoleFinances.convertVariation(currencie.data.variation) }} %
+      <ion-note slot="end" [color]="(stock.data.variation < 0)?'danger':'success'">
+        {{ hgConsoleFinances.convertVariation(stock.data.variation) }} %
       </ion-note>
     </ion-item>
     <ion-item>
       <ion-label>
-        <h2>Valor de compra</h2>
-        <p>Em BRL Real</p>
-      </ion-label>
-      <ion-note slot="end" color="success">
-        R$ {{ hgConsoleFinances.convertValueInBrl(currencie.data.buy) }}
-      </ion-note>
-    </ion-item>
-    <ion-item *ngIf="currencie.data.sell">
-      <ion-label>
-        <h2>Valor de venda</h2>
-        <p>Em BRL Real</p>
+        Local/País
       </ion-label>
       <ion-note slot="end" color="secondary">
-        R$ {{ hgConsoleFinances.convertValueInBrl(currencie.data.sell) }}
+        {{ stock.data.location }}
       </ion-note>
     </ion-item>
   </ion-list>

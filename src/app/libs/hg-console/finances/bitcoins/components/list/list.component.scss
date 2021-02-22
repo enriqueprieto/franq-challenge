@@ -1,0 +1,20 @@
+:root{
+    display: block;
+}
+ion-slides{
+    --bullet-background-active: var(--ion-color-tertiary);
+}
+ion-slide{
+    ion-card{
+      width: 100%;
+      ion-card-title{
+        font-size: 22px;
+      }
+      ion-card-subtitle{
+        white-space: nowrap;
+        max-width: 100%;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+    }
+  }

@@ -6,18 +6,24 @@ import { HgConsoleApiModule } from "../api/api.module";
 import { HgConsoleFinancesSectionComponent } from "./components/section/section.component";
 import { HgConsoleFinances } from "./finances";
 import { HgConsoleFinancesCurrenciesModule } from './currencies/currencies.module';
+import { HgConsoleFinancesStocksModule } from "./stocks/stocks.module";
+import { HgConsoleFinancesBitcoinsModule } from "./bitcoins/bitcoins.module";
 @NgModule({
     imports: [
         CommonModule,
         IonicModule,
         FormsModule,
         HgConsoleFinancesCurrenciesModule,
+        HgConsoleFinancesStocksModule,
+        HgConsoleFinancesBitcoinsModule,
         HgConsoleApiModule
     ],
     declarations: [HgConsoleFinancesSectionComponent],
     exports: [
         HgConsoleFinancesSectionComponent,
-        HgConsoleFinancesCurrenciesModule
+        HgConsoleFinancesCurrenciesModule,
+        HgConsoleFinancesStocksModule,
+        HgConsoleFinancesBitcoinsModule
     ],
     providers: [HgConsoleFinances]
 })

@@ -1,9 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { AlertController, ModalController } from '@ionic/angular';
+import { AlertController, IonRouterOutlet, ModalController, NavController } from '@ionic/angular';
+import { HgConsoleFinancesBitcoinsViewComponent } from '../libs/hg-console/finances/bitcoins/components/view/view.component';
 import { HgConsoleFinancesCurrenciesViewComponent } from '../libs/hg-console/finances/currencies/components/view/view.component';
 // import { CurrencesViewComponent } from '../libs/currences/currences-view/currences-view.component';
 import { HgConsoleFinances, HgConsoleFinancesBitcoins, HgConsoleFinancesBitcoinsOptions, HgConsoleFinancesCurrencies, HgConsoleFinancesCurrenciesOptions, HgConsoleFinancesResults, HgConsoleFinancesStocks, HgConsoleFinancesStocksOptions  } from '../libs/hg-console/finances/finances';
+import { HgConsoleFinancesStocksViewComponent } from '../libs/hg-console/finances/stocks/components/view/view.component';
 import { AuthService } from '../services/auth/auth.service';
+import { ProfileComponent } from './profile/profile.component';
 
 interface SlideConfig{
   slidesPerView?:number|'auto';
@@ -88,7 +91,9 @@ export class HomePage implements OnInit{
     private alertCtrl:AlertController,
     private authService:AuthService,
     private modalCtrl:ModalController,
-    private hgConsoleFinance:HgConsoleFinances
+    private hgConsoleFinance:HgConsoleFinances,
+    private routerOutlet:IonRouterOutlet,
+    private navCtrl:NavController
   ) {}
   ngOnInit(): void {
     this.initialize();
@@ -173,8 +178,51 @@ export class HomePage implements OnInit{
       componentProps: {
         currencie
       },
+      swipeToClose: true,
+      presentingElement: this.routerOutlet.nativeEl,
       cssClass: ['modal-custom']
     });
+    return await modal.present();
+  }
+  async openModalStock(stock:HgSectionItem<HgConsoleFinancesStocksOptions>){
+    let modal = await this.modalCtrl.create({
+      component: HgConsoleFinancesStocksViewComponent,
+      componentProps: {
+        stock
+      },
+      swipeToClose: true,
+      presentingElement: this.routerOutlet.nativeEl,
+      cssClass: ['modal-custom']
+    });
+    return await modal.present();
+  }
+  async openModalBitcoin(bitcoin:HgSectionItem<HgConsoleFinancesBitcoinsOptions>){
+    let modal = await this.modalCtrl.create({
+      component: HgConsoleFinancesBitcoinsViewComponent,
+      componentProps: {
+        bitcoin
+      },
+      swipeToClose: true,
+      presentingElement: this.routerOutlet.nativeEl,
+      cssClass: ['modal-custom']
+    });
+    return await modal.present();
+  }
+  async openModalProfile(){
+    let modal = await this.modalCtrl.create({
+      component: ProfileComponent,
+      componentProps: {
+        user: this.user
+      },
+      swipeToClose: true,
+      presentingElement: this.routerOutlet.nativeEl,
+      cssClass: ['modal-custom']
+    });
+    modal.onDidDismiss().then((res)=>{
+      if(res.data){
+        this.navCtrl.navigateForward('/login');
+      }
+    })
     return await modal.present();
   }
 }

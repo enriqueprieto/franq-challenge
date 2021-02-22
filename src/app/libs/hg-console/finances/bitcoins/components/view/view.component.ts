@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { HgConsoleFinances, HgConsoleFinancesBitcoinsOptions } from '../../../finances';
+
 import { Components } from '@ionic/core';
-import { HgConsoleFinances, HgConsoleFinancesCurrenciesOptions } from '../../../finances';
 
 interface HgSectionItem<T>{
   name:string;
@@ -8,13 +9,13 @@ interface HgSectionItem<T>{
 }
 
 @Component({
-  selector: 'hg-console-finances-currencies-view',
+  selector: 'hg-console-finances-bitcoins-view',
   templateUrl: './view.component.html',
   styleUrls: ['./view.component.scss'],
 })
-export class HgConsoleFinancesCurrenciesViewComponent implements OnInit {
+export class HgConsoleFinancesBitcoinsViewComponent implements OnInit {
   @Input() modal:Components.IonModal;
-  @Input('currencie') currencie:HgSectionItem<HgConsoleFinancesCurrenciesOptions>;
+  @Input('bitcoin') bitcoin:HgSectionItem<HgConsoleFinancesBitcoinsOptions>;
   constructor(
     public hgConsoleFinances:HgConsoleFinances
   ) { }
@@ -24,4 +25,5 @@ export class HgConsoleFinancesCurrenciesViewComponent implements OnInit {
   async back(){
     return await this.modal.dismiss();
   }
+
 }

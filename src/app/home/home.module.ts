@@ -7,6 +7,7 @@ import { HomePage } from './home.page';
 import { HomePageRoutingModule } from './home-routing.module';
 import { AuthService } from '../services/auth/auth.service';
 import { HgConsoleFinancesModule } from '../libs/hg-console/finances/finances.module';
+import { ProfileComponent } from './profile/profile.component';
 
 
 @NgModule({
@@ -17,7 +18,7 @@ import { HgConsoleFinancesModule } from '../libs/hg-console/finances/finances.mo
     HgConsoleFinancesModule,
     HomePageRoutingModule
   ],
-  declarations: [HomePage],
+  declarations: [HomePage, ProfileComponent],
   providers: [
     AuthService
   ]

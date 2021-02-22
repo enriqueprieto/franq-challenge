@@ -1,0 +1,36 @@
+<ion-header>
+  <ion-toolbar color="tertiary">
+    <ion-buttons slot="start">
+      <ion-button (click)="back()">
+        <ion-icon name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-list mode="ios">
+    <ion-list-header>
+      Sua conta
+    </ion-list-header>
+    <ion-item>
+      <ion-label position="stacked">
+        Nome
+      </ion-label>
+      <ion-input [(ngModel)]="userClone.displayName" placeholder="Seu nome"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="stacked">
+        E-mail
+      </ion-label>
+      <ion-input [(ngModel)]="userClone.email" readonly placeholder="Seu nome"></ion-input>
+    </ion-item>
+  </ion-list>
+  <div class="ion-padding">
+    <ion-button expand="block" shape="round" color="tertiary" [disabled]="!isDiff()" (click)="save()">
+      Salvar
+    </ion-button>
+    <ion-button expand="block" shape="round" color="danger" fill="clear" (click)="logOut()">
+      Sair 
+    </ion-button>
+  </div>
+</ion-content>
