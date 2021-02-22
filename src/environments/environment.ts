@@ -4,7 +4,13 @@
 
 export const environment = {
   production: false,
-  HGKey: "d98f4063",
+  hgConsole: {
+    apiKey: "d98f4063",
+    finances:{
+      apiKey: "d98f4063",
+      endpoint: "https://api.hgbrasil.com/finance"
+    }
+  },
   firebase: {
     apiKey: "AIzaSyBI6sn8POQqm9AZpXWNaHDskauGmZpfCGU",
     authDomain: "franq-28d43.firebaseapp.com",

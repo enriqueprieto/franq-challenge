@@ -1,27 +1,16 @@
-#container {
-  text-align: center;
 
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 50%;
-  transform: translateY(-50%);
-}
-
-#container strong {
-  font-size: 20px;
-  line-height: 26px;
-}
-
-#container p {
-  font-size: 16px;
-  line-height: 22px;
-
-  color: #8c8c8c;
-
-  margin: 0;
-}
-
-#container a {
-  text-decoration: none;
+#header{
+  padding-bottom: 16px;
+  background-color: var(--ion-color-tertiary);
+  color: var(--ion-color-tertiary-contrast);
+  border-bottom-right-radius: 32px;
+  h1{
+    font-size: 18px;
+    font-weight: normal;
+    span{
+      display: block;
+      font-size: 42px;
+      font-weight: bold;
+    }
+  }
 }

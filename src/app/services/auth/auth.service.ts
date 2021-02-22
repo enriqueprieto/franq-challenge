@@ -43,7 +43,8 @@ export class AuthService {
   signInWithEmailAndPassword(auth:AuthModel){
     return this.fireAuth.signInWithEmailAndPassword(auth.email, auth.password);
   }
-  signOut(){
+  async signOut(){
+    await this.clearUserInStorage();
     return this.fireAuth.signOut();
   }
   private clearUserInStorage(){
@@ -58,5 +59,11 @@ export class AuthService {
       return null;
     }
     return JSON.parse(userFromStorage);
+  }
+  async updateProfile(user:firebase.default.User){
+    let currentUser = await this.fireAuth.currentUser;
+    return currentUser.updateProfile({
+      displayName: user.displayName
+    });
   }
 }

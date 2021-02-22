@@ -1,20 +1,28 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Blank
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
-
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
-
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
+<ion-content color="light">
+  <section id="header">
+    <ion-grid fixed>
+      <h1 class="ion-padding-start">
+        Bem vindo ao <span>FranqApp</span>
+      </h1>
+      <ion-item color="tertiary" lines="none" *ngIf="user" button detail class="ion-align-items-center" (click)="openModalProfile()">
+        <ion-icon name="happy" slot="start" color="warning"></ion-icon>
+        <ion-label>
+          <p>{{ (user.displayName)?user.displayName:'Sua conta' }}</p>
+          <h2>{{ user.email }}</h2>
+        </ion-label>
+      </ion-item>
+    </ion-grid>
+  </section>
+  <ion-progress-bar color="tertiary" *ngIf="hgConsoleLoading" type="indeterminate"></ion-progress-bar>
+  <div *ngIf="hgConsoleFinanceData">
+    <hg-console-finances-section id="currencies" title="Cotação das principais moedas para o real" >
+      <hg-console-finances-currencies-list [items]="currencies.items" [slideConfig]="currencies.slideConfig" (onClickItem)="openModalCurrence($event)"></hg-console-finances-currencies-list>
+    </hg-console-finances-section>
+    <hg-console-finances-section id="stocks" title="Índices de bolsas de valores pelo mundo">
+      <hg-console-finances-stocks-list [items]="stocks.items" [slideConfig]="currencies.slideConfig" (onClickItem)="openModalStock($event)"></hg-console-finances-stocks-list>
+    </hg-console-finances-section>
+    <hg-console-finances-section id="bitcoins" title="Cotação do BitCoin nas principais corretoras">
+      <hg-console-finances-bitcoins-list [items]="bitcoins.items" [slideConfig]="bitcoins.slideConfig" (onClickItem)="openModalBitcoin($event)"></hg-console-finances-bitcoins-list>
+    </hg-console-finances-section>
   </div>
 </ion-content>

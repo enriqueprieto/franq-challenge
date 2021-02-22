@@ -1,0 +1,79 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar color="tertiary">
+    <ion-buttons slot="start">
+      <ion-button (click)="back()">
+        <ion-icon name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div id="cover" class="ion-padding ion-text-center">
+    <ion-badge [color]="(bitcoin.data.variation < 0)?'danger':'success'">
+      {{ hgConsoleFinances.convertVariation(bitcoin.data.variation) }} %
+    </ion-badge>
+    <h1 class="ion-no-margin">
+      {{ (bitcoin.data.format[0]=='USD')?'$':'R$' }} {{ (bitcoin.data.format[0]=='USD')?hgConsoleFinances.convertValueInDollar(bitcoin.data.last):hgConsoleFinances.convertValueInBrl(bitcoin.data.last) }}
+    </h1>
+    <h2>
+      {{ bitcoin.data.name }} / {{ bitcoin.data.format[0] }}
+    </h2>
+  </div>
+  <ion-list lines="full" mode="ios">
+    <ion-list-header>
+      Informações
+    </ion-list-header>
+    <ion-item>
+      <ion-label>
+        Sigla
+      </ion-label>
+      <ion-note slot="end">
+        {{ bitcoin.name }}
+      </ion-note>
+    </ion-item>
+    <ion-item>
+      <ion-label>
+        Nome
+      </ion-label>
+      <ion-note slot="end">
+        {{ bitcoin.data.name }}
+      </ion-note>
+    </ion-item>
+    <ion-item>
+      <ion-label>
+        Variação
+      </ion-label>
+      <ion-note slot="end" [color]="(bitcoin.data.variation < 0)?'danger':'success'">
+        {{ hgConsoleFinances.convertVariation(bitcoin.data.variation) }} %
+      </ion-note>
+    </ion-item>
+    <ion-item *ngIf="bitcoin.data.last">
+      <ion-label>
+        <h2>Valor anterior</h2>
+        <p>Em {{ (bitcoin.data.format[0]=='USD')?'USD Dollar':'BRL Real' }}</p>
+      </ion-label>
+      <ion-note slot="end" color="secondary">
+        {{ (bitcoin.data.format[0]=='USD')?'$':'R$' }} {{ (bitcoin.data.format[0]=='USD')?hgConsoleFinances.convertValueInDollar(bitcoin.data.last):hgConsoleFinances.convertValueInBrl(bitcoin.data.last) }}
+      </ion-note>
+    </ion-item>
+    <ion-item *ngIf="bitcoin.data.buy">
+      <ion-label>
+        <h2>Valor de compra</h2>
+        <p>Em {{ (bitcoin.data.format[0]=='USD')?'USD Dollar':'BRL Real' }}</p>
+      </ion-label>
+      <ion-note slot="end" color="success">
+        {{ (bitcoin.data.format[0]=='USD')?'$':'R$' }} {{ (bitcoin.data.format[0]=='USD')?hgConsoleFinances.convertValueInDollar(bitcoin.data.buy):hgConsoleFinances.convertValueInBrl(bitcoin.data.buy) }}
+      </ion-note>
+    </ion-item>
+    <ion-item *ngIf="bitcoin.data.buy">
+      <ion-label>
+        <h2>Valor de venda</h2>
+        <p>Em {{ (bitcoin.data.format[0]=='USD')?'USD Dollar':'BRL Real' }}</p>
+      </ion-label>
+      <ion-note slot="end" color="tertiary">
+        {{ (bitcoin.data.format[0]=='USD')?'$':'R$' }} {{ (bitcoin.data.format[0]=='USD')?hgConsoleFinances.convertValueInDollar(bitcoin.data.sell):hgConsoleFinances.convertValueInBrl(bitcoin.data.sell) }}
+      </ion-note>
+    </ion-item>
+  </ion-list>
+</ion-content>
