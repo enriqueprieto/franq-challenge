@@ -44,4 +44,4 @@ Assim que instalar as dependências, rode o comando abaixo.
 ionic serve
 ```
 
-Prontinho, aguarde o `angualar` compilar o projeto e ele abrirá automaticamente o webapp em uma nova aba em seu navegador.
+Prontinho, aguarde o `angular` compilar o projeto e ele abrirá automaticamente o webapp em uma nova aba em seu navegador.
